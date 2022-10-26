@@ -83,6 +83,7 @@ runs:
     ##################
     
     - name: Show GITHUB_ACTION_PATH environment variable
+      shell: bash
       run: |
         echo "The GITHUB_ACTION_PATH is: $GITHUB_ACTION_PATH"
 
