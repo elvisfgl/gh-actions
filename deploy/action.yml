@@ -81,6 +81,10 @@ runs:
     ##################
     # GH Pages
     ##################
+    
+    - name: Show GITHUB_ACTION_PATH environment variable
+      run: |
+        echo "The GITHUB_ACTION_PATH is: $GITHUB_ACTION_PATH"
 
     - name: Deploy to gh-pages
       if: ${{ inputs.cloud_service == 'gh_pages' }}
