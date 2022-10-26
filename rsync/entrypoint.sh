@@ -10,7 +10,7 @@ if [[ $INPUT_CACHE ]]; then
 else
     CACHE_OPTIONS="Cache-Control:no-store"
 fi
-
+echo $INPUT_ALLOWED_DESTINATION
 # Check destination
 if [[ $INPUT_TO =~ $INPUT_ALLOWED_DESTINATION ]]; then
     echo "Destination allowed"
