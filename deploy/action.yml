@@ -116,7 +116,7 @@ runs:
         cloud_credentials: '${{ inputs.cloud_credentials }}'
         allowed_destination: '${{ inputs.allowed_destination }}'
         path: ./${{ env.TMP_PATH }}              
-        exclude: '.*\.md$|\.gitignore$|\.git/.*$|gha-creds|\.github/.*$'
+        exclude: 'gha-creds-+\w+\.+json*'
         cache: '${{ inputs.cache }}'
 
     - name: Update GCS deployment status
