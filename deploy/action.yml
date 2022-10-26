@@ -73,6 +73,9 @@ runs:
         name: ${{ inputs.artifact_name }}
         path: ./${TMP_PATH}
 
+    - name: Echo Path
+      run: Echo "./${TMP_PATH}"
+
     ##################
     # GH Pages
     ##################
