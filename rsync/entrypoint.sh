@@ -4,13 +4,13 @@ echo "$INPUT_CLOUD_CREDENTIALS" > /secrets.json
 gcloud auth activate-service-account --key-file=/secrets.json
 rm /secrets.json
 
-echo $INPUT_CACHE
-
 # Cache Options
-if [[ $INPUT_CACHE ]]; then
+if [[ $INPUT_CACHE == "true" ]]; then
     CACHE_OPTIONS="Cache-Control:public,max-age=3600"
+    echo "Sync with CACHE"
 else
     CACHE_OPTIONS="Cache-Control:no-store"
+    echo "Sync without CACHE"
 fi
 
 # Check destination
