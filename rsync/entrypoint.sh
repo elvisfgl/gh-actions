@@ -6,7 +6,7 @@ rm /secrets.json
 
 # Cache Options
 if [[ $INPUT_CACHE ]]; then
-    CACHE_OPTIONS="Cache-Control:public, max-age=3600"
+    CACHE_OPTIONS="Cache-Control:public,max-age=3600"
 else
     CACHE_OPTIONS="Cache-Control:no-store"
 fi
@@ -28,7 +28,7 @@ else
 
     # Syncing files to bucket
     echo "Syncing bucket $INPUT_CLOUD_BUCKET ..."
-    gsutil -m -h ${CACHE_OPTIONS} rsync -r -c -d -x "$INPUT_EXCLUDE" /github/workspace/$INPUT_PATH gs://$INPUT_CLOUD_BUCKET/$INPUT_TO
+    gsutil -m -h "${CACHE_OPTIONS}" rsync -r -c -d -x "$INPUT_EXCLUDE" /github/workspace/$INPUT_PATH gs://$INPUT_CLOUD_BUCKET/$INPUT_TO
 
     if [ $? -ne 0 ]; then
         echo "Syncing failed"
