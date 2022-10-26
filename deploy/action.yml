@@ -71,7 +71,7 @@ runs:
       uses: actions/download-artifact@v2
       with:
         name: ${{ inputs.artifact_name }}
-        path: ./${{ env.TMP_PATH }}
+        path: ./$TMP_PATH
 
     ##################
     # GH Pages
@@ -82,7 +82,7 @@ runs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ inputs.github_token }}
-        publish_dir: ./${{ env.TMP_PATH }}
+        publish_dir: ./$TMP_PATH
         destination_dir: ./${{ inputs.to }}
 
     - name: Update deployment status
@@ -115,7 +115,7 @@ runs:
         cloud_bucket: '${{ inputs.cloud_bucket }}'
         cloud_credentials: '${{ inputs.cloud_credentials }}'
         allowed_destination: '${{ inputs.allowed_destination }}'
-        path: ./${{ env.TMP_PATH }}              
+        path: ./$TMP_PATH            
         exclude: '.*\.md$|\.gitignore$|\.git/.*$|\.github/.*$'
         cache: '${{ inputs.cache }}'
 
