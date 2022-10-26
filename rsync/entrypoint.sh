@@ -12,7 +12,7 @@ else
 fi
 
 # Check destination
-if [[ $INPUT_TO =~ "/$INPUT_ALLOWED_DESTINATION" ]]; then
+if [[ $INPUT_TO =~ $INPUT_ALLOWED_DESTINATION ]]; then
     echo "Destination allowed"
 else
     echo "Error - Destination not allowed"
