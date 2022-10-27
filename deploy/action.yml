@@ -82,19 +82,16 @@ runs:
     # GH Pages
     ##################
     
-    - name: Show GITHUB_ACTION related environment variables
+    - name: Get RSYNC Action URL
+      id: action_path
       shell: bash
-      run: |
-        echo "The GITHUB_ACTION is: $GITHUB_ACTION"
-        echo "The GITHUB_ACTION_PATH is: $GITHUB_ACTION_PATH"
-        echo "The GITHUB_ACTION_REPOSITORY is: $GITHUB_ACTION_REPOSITORY"
-        echo "The GITHUB_ACTION_REF is: $GITHUB_ACTION_REF"
-        
-    - name: Show Github action directory contents
+      run: echo "rsync_path=${GITHUB_ACTION_PATH/deploy*/}rsync" >> $GITHUB_OUTPUT
+      
+    - name: Print RSYNC Action Path
       shell: bash
-      run: |
-        export RSYNC_PATH="${GITHUB_ACTION_PATH/deploy*/}rsync"
-        echo "$(ls $RSYNC_PATH)"
+      run: echo "${RSYNC_PATH}"
+      env:
+        RSYNC_PATH: ${{ steps.action_path.outputs.rsync_path }}
 
     - name: Deploy to gh-pages
       if: ${{ inputs.cloud_service == 'gh_pages' }}
