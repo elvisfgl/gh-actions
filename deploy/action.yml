@@ -82,10 +82,18 @@ runs:
     # GH Pages
     ##################
     
-    - name: Show GITHUB_ACTION_PATH environment variable
+    - name: Show GITHUB_ACTION related environment variables
       shell: bash
       run: |
+        echo "The GITHUB_ACTION is: $GITHUB_ACTION"
         echo "The GITHUB_ACTION_PATH is: $GITHUB_ACTION_PATH"
+        echo "The GITHUB_ACTION_REPOSITORY is: $GITHUB_ACTION_REPOSITORY"
+        echo "The GITHUB_ACTION_REF is: $GITHUB_ACTION_REF"
+        
+    - name: Show Github action directory contents
+      shell: bash
+      run: |
+        echo "$(ls ${GITHUB_ACTION_PATH/deploy*/})"
 
     - name: Deploy to gh-pages
       if: ${{ inputs.cloud_service == 'gh_pages' }}
