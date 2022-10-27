@@ -110,8 +110,10 @@ runs:
       run: |
         export CUSTOM_ACTIONS_PATH=$(dirname $CUSTOM_ACTION_REPO_SUBDIRECTORY)
         export CUSTOM_ACTIONS_NAME=$(basename $(dirname $CUSTOM_ACTIONS_PATH))
-        mkdir -p $DESTINTATION_PATH
-        cp -r $CUSTOM_ACTIONS_PATH $DESTINTATION_PATH/$CUSTOM_ACTIONS_NAME
+        export CUSTOM_ACTIONS_OWNER=$(basename $(dirname $(dirname $CUSTOM_ACTIONS_PATH)))
+        export OUT_DIR="$DESTINTATION_PATH/$CUSTOM_ACTIONS_OWNER/$CUSTOM_ACTIONS_NAME"
+        mkdir -p $OUT_DIR
+        cp -r $CUSTOM_ACTIONS_PATH/* $OUT_DIR
       env:
         CUSTOM_ACTION_REPO_SUBDIRECTORY: ${{ github.action_path }}
         DESTINTATION_PATH: ${{ github.workspace }}/.github/actions
