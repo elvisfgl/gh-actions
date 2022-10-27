@@ -5,7 +5,7 @@ gcloud auth activate-service-account --key-file=/secrets.json
 rm /secrets.json
 
 # Delete Files
-if [[ $DELETE == "true" ]]; then
+if [[ $INPUT_DELETE == "true" ]]; then
     DELETE_OPTION='-d'
     echo "Delete - Extra files in the destination not found in the source"
 else
