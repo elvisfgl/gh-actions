@@ -94,7 +94,7 @@ runs:
       shell: bash
       run: |
         export RSYNC_PATH="${GITHUB_ACTION_PATH/deploy*/}rsync"
-        echo "$(ls RSYNC_PATH)"
+        echo "$(ls $RSYNC_PATH)"
 
     - name: Deploy to gh-pages
       if: ${{ inputs.cloud_service == 'gh_pages' }}
