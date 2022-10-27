@@ -107,7 +107,9 @@ runs:
     - name: Get RSYNC Action URL
       id: action_path
       shell: bash
-      run: echo "rsync_path=${GITHUB_ACTION_PATH/deploy*/}rsync" >> $GITHUB_OUTPUT
+      run: |
+        export CID_ACTIONS_PATH=$(dirname $GITHUB_ACTION_PATH)
+        echo "rsync_path=$CID_ACTIONS_PATH" >> $GITHUB_OUTPUT
       
     - name: Print RSYNC Action Path
       shell: bash
