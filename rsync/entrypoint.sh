@@ -7,10 +7,10 @@ rm /secrets.json
 # Delete Files
 if [[ $INPUT_DELETE == "true" ]]; then
     DELETE_OPTION='-d'
-    echo "Delete - Extra files in the destination not found in the source"
+    echo "Delete -> true: Files removed from source will be removed from destination"
 else
     DELETE_OPTION=''    
-    echo "NOT Delete - extra files in the destination not found in the source"
+    echo "Delete -> false: No files will be removed from destination, just created or updated"
 fi
 
 # Cache Options
