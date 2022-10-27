@@ -104,18 +104,20 @@ runs:
     # GCP
     ##################
     
-    - name: Get RSYNC Action URL
-      id: action_path
+    - name: Copy custom action repository
+      id: copy_custom_action_repo
       shell: bash
       run: |
-        export CID_ACTIONS_PATH=$(dirname $GITHUB_ACTION_PATH)
-        echo "rsync_path=$CID_ACTIONS_PATH" >> $GITHUB_OUTPUT
-      
-    - name: Print RSYNC Action Path
-      shell: bash
-      run: echo "${RSYNC_PATH}"
+        export CUSTOM_ACTIONS_PATH=$(dirname $CUSTOM_ACTION_REPO_SUBDIRECTORY)
+        export CUSTOM_ACTIONS_NAME=$(basename $(dirname $CUSTOM_ACTIONS_PATH))
+        cp -r $CUSTOM_ACTIONS_PATH $DESTINTATION_PATH/$CUSTOM_ACTIONS_NAME
       env:
-        RSYNC_PATH: ${{ steps.action_path.outputs.rsync_path }}
+        CUSTOM_ACTION_REPO_SUBDIRECTORY: ${{ github.action_path }}
+        DESTINTATION_PATH: ${{ github.workspace }}/.github/actions
+              
+    - name: Print Custom Action Path
+      shell: bash
+      run: echo $(ls .github/actions/elvisfgl/gh-actions)
 
     - name: Authenticate with Google Cloud
       if: ${{ inputs.cloud_service == 'gcp' }}
@@ -127,7 +129,7 @@ runs:
     # Rsync to GCS
     - name: Rsync GCS
       if: ${{ inputs.cloud_service == 'gcp' }}
-      uses: elvisfgl/gh-actions/rsync@test-actions
+      uses: ./.github/actions/elvisfgl/gh-actions/rsync
       with:
         to: '${{ inputs.to }}'
         cloud_bucket: '${{ inputs.cloud_bucket }}'
