@@ -4,6 +4,15 @@ echo "$INPUT_CLOUD_CREDENTIALS" > /secrets.json
 gcloud auth activate-service-account --key-file=/secrets.json
 rm /secrets.json
 
+# Delete Files
+if [[ $DELETE == "true" ]]; then
+    DELETE_OPTION='-d'
+    echo "Delete - Extra files in the destination not found in the source"
+else
+    DELETE_OPTION=''    
+    echo "NOT Delete - extra files in the destination not found in the source"
+fi
+
 # Cache Options
 if [[ $INPUT_CACHE == "true" ]]; then
     CACHE_OPTIONS=''
@@ -30,7 +39,7 @@ else
 
     # Syncing files to bucket
     echo "Syncing bucket $INPUT_CLOUD_BUCKET ..."
-    echo gsutil -m $CACHE_OPTIONS rsync -r -c -d -x '$INPUT_EXCLUDE' /github/workspace/$INPUT_PATH gs://$INPUT_CLOUD_BUCKET/$INPUT_TO | bash
+    echo gsutil -m $CACHE_OPTIONS rsync -r -c $DELETE_OPTIONS -x '$INPUT_EXCLUDE' /github/workspace/$INPUT_PATH gs://$INPUT_CLOUD_BUCKET/$INPUT_TO | bash
 
     if [ $? -ne 0 ]; then
         echo "Syncing failed"
