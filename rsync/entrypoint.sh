@@ -6,12 +6,10 @@ rm /secrets.json
 
 # Cache Options
 if [[ $INPUT_CACHE == "true" ]]; then
-    HEADER=''
-    CACHE_OPTIONS=$(eval $HEADER)
+    CACHE_OPTIONS=''
     echo "Sync with CACHE"
 else
-    HEADER='-h "Cache-Control:no-store"'
-    CACHE_OPTIONS=$(eval $HEADER)
+    CACHE_OPTIONS='-h "Cache-Control:no-store"'    
     echo "Sync without CACHE"
 fi
 
@@ -32,7 +30,7 @@ else
 
     # Syncing files to bucket
     echo "Syncing bucket $INPUT_CLOUD_BUCKET ..."
-    gsutil -m ${CACHE_OPTIONS} rsync -r -c -d -x "$INPUT_EXCLUDE" /github/workspace/$INPUT_PATH gs://$INPUT_CLOUD_BUCKET/$INPUT_TO
+    echo gsutil -m $CACHE_OPTIONS rsync -r -c -d -x "$INPUT_EXCLUDE" /github/workspace/$INPUT_PATH gs://$INPUT_CLOUD_BUCKET/$INPUT_TO | bash
 
     if [ $? -ne 0 ]; then
         echo "Syncing failed"
