@@ -93,7 +93,8 @@ runs:
     - name: Show Github action directory contents
       shell: bash
       run: |
-        echo "$(ls ${GITHUB_ACTION_PATH/deploy*/})"
+        export RSYNC_PATH="${GITHUB_ACTION_PATH/deploy*/}rsync"
+        echo "$(ls RSYNC_PATH)"
 
     - name: Deploy to gh-pages
       if: ${{ inputs.cloud_service == 'gh_pages' }}
