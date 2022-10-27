@@ -14,7 +14,7 @@ else
 fi
 
 # Cache Options
-if [[ $INPUT_CACHE == "true"]]; then
+if [[ $INPUT_CACHE == "true" ]]; then
     CACHE_OPTIONS=''
     echo "Sync with CACHE"
 else
