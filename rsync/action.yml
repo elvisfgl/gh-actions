@@ -33,7 +33,7 @@ inputs:
   delete:
     description: 'Delete extra files in the destination not found in the source'
     required: true
-    type: string
+    type: bool
 
 runs:
   using: docker

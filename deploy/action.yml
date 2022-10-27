@@ -58,7 +58,7 @@ inputs:
   delete:
     description: 'Delete extra files in the destination not found in the source'
     required: false
-    type: string
+    type: bool
     default: true
 
 env:
@@ -129,7 +129,8 @@ runs:
         allowed_destination: '${{ inputs.allowed_destination }}'
         path: ./${{ env.TMP_PATH }}              
         exclude: '${{ inputs.exclude }}'
-        cache: '${{ inputs.cache }}'
+        cache: ${{ inputs.cache }}
+        delete: ${{ inputs.delete }}
 
     - name: Update GCS deployment status
       if: ${{ inputs.cloud_service == 'gcp' }}
