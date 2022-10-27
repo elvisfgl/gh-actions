@@ -82,17 +82,6 @@ runs:
     # GH Pages
     ##################
     
-    - name: Get RSYNC Action URL
-      id: action_path
-      shell: bash
-      run: echo "rsync_path=${GITHUB_ACTION_PATH/deploy*/}rsync" >> $GITHUB_OUTPUT
-      
-    - name: Print RSYNC Action Path
-      shell: bash
-      run: echo "${RSYNC_PATH}"
-      env:
-        RSYNC_PATH: ${{ steps.action_path.outputs.rsync_path }}
-
     - name: Deploy to gh-pages
       if: ${{ inputs.cloud_service == 'gh_pages' }}
       uses: peaceiris/actions-gh-pages@v3
@@ -114,6 +103,17 @@ runs:
     ##################
     # GCP
     ##################
+    
+    - name: Get RSYNC Action URL
+      id: action_path
+      shell: bash
+      run: echo "rsync_path=${GITHUB_ACTION_PATH/deploy*/}rsync" >> $GITHUB_OUTPUT
+      
+    - name: Print RSYNC Action Path
+      shell: bash
+      run: echo "${RSYNC_PATH}"
+      env:
+        RSYNC_PATH: ${{ steps.action_path.outputs.rsync_path }}
 
     - name: Authenticate with Google Cloud
       if: ${{ inputs.cloud_service == 'gcp' }}
@@ -125,7 +125,7 @@ runs:
     # Rsync to GCS
     - name: Rsync GCS
       if: ${{ inputs.cloud_service == 'gcp' }}
-      uses: elvisfgl/gh-actions/rsync@test-actions
+      uses: ${{ steps.action_path.outputs.rsync_path }}
       with:
         to: '${{ inputs.to }}'
         cloud_bucket: '${{ inputs.cloud_bucket }}'
