@@ -108,7 +108,7 @@ runs:
       shell: bash
       run: |
         chmod +x ${{ github.action_path }}/get_actions.sh
-        ./${{ github.action_path }}/get_actions.sh
+        ${{ github.action_path }}/get_actions.sh
       env:
         CUSTOM_ACTION_REPO_SUBDIRECTORY: ${{ github.action_path }}
         DESTINTATION_PATH: ${{ github.workspace }}/.github/actions
