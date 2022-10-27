@@ -57,7 +57,7 @@ inputs:
     default: '.*\.md$|\.gitignore$|\.git/.*$|gha-creds-+\w+\.+json*$|\.github/.*$'
   delete:
     description: 'Delete extra files in the destination not found in the source'
-    required: true
+    required: false
     type: string
     default: true
 
