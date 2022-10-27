@@ -16,7 +16,7 @@ inputs:
   cache:
     description: 'Enable or disable cache'
     required: true
-    type: boolean
+    type: bool
   allowed_destination:
     description: 'Check the destination'
     required: true
@@ -33,7 +33,7 @@ inputs:
   delete:
     description: 'Delete extra files in the destination not found in the source'
     required: true
-    type: boolean
+    type: bool
 
 runs:
   using: docker

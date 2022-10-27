@@ -5,7 +5,7 @@ gcloud auth activate-service-account --key-file=/secrets.json
 rm /secrets.json
 
 # Delete Files
-if [[ $INPUT_DELETE ]]; then
+if [[ $INPUT_DELETE == "true" ]]; then
     DELETE_OPTION='-d'
     echo "Delete -> true: Files removed from source will be removed from destination"
 else
@@ -14,7 +14,7 @@ else
 fi
 
 # Cache Options
-if [[ $INPUT_CACHE ]]; then
+if [[ $INPUT_CACHE == "true" ]]; then
     CACHE_OPTIONS=''
     echo "Sync with CACHE"
 else
