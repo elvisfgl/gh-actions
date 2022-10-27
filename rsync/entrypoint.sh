@@ -39,7 +39,7 @@ else
 
     # Syncing files to bucket
     echo "Syncing bucket $INPUT_CLOUD_BUCKET ..."
-    echo gsutil -m $CACHE_OPTIONS rsync -r -c '$DELETE_OPTIONS' -x '$INPUT_EXCLUDE' /github/workspace/$INPUT_PATH gs://$INPUT_CLOUD_BUCKET/$INPUT_TO | bash
+    echo gsutil -m $CACHE_OPTIONS rsync -r -c $DELETE_OPTIONS -x '$INPUT_EXCLUDE' /github/workspace/$INPUT_PATH gs://$INPUT_CLOUD_BUCKET/$INPUT_TO | bash
 
     if [ $? -ne 0 ]; then
         echo "Syncing failed"
