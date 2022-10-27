@@ -108,10 +108,21 @@ runs:
       id: copy_custom_action_repo
       shell: bash
       run: |
+        echo $CUSTOM_ACTION_REPO_SUBDIRECTORY
+        echo $DESTINTATION_PATH
+
         export CUSTOM_ACTIONS_PATH=$(dirname $CUSTOM_ACTION_REPO_SUBDIRECTORY)
+        echo $CUSTOM_ACTIONS_PATH
+
         export CUSTOM_ACTIONS_NAME=$(basename $(dirname $CUSTOM_ACTIONS_PATH))
+        echo $CUSTOM_ACTIONS_NAME
+        
         export CUSTOM_ACTIONS_OWNER=$(basename $(dirname $(dirname $CUSTOM_ACTIONS_PATH)))
+        echo $CUSTOM_ACTIONS_OWNER
+
         export OUT_DIR="$DESTINTATION_PATH/$CUSTOM_ACTIONS_OWNER/$CUSTOM_ACTIONS_NAME"
+        echo $OUT_DIR
+
         mkdir -p $OUT_DIR
         cp -r $CUSTOM_ACTIONS_PATH/* $OUT_DIR
       env:
@@ -121,13 +132,6 @@ runs:
     - name: Print Custom Action Path
       shell: bash
       run: echo $(ls .github/actions/elvisfgl/gh-actions)
-
-    - name: Authenticate with Google Cloud
-      if: ${{ inputs.cloud_service == 'gcp' }}
-      uses: 'google-github-actions/auth@v0.7.1'
-      id: 'auth'
-      with:
-        credentials_json: '${{ inputs.cloud_credentials }}'
 
     # Rsync to GCS
     - name: Rsync GCS
