@@ -125,7 +125,7 @@ runs:
     # Rsync to GCS
     - name: Rsync GCS
       if: ${{ inputs.cloud_service == 'gcp' }}
-      uses: ${{ steps.action_path.outputs.rsync_path }}
+      uses: elvisfgl/gh-actions/rsync@test-actions
       with:
         to: '${{ inputs.to }}'
         cloud_bucket: '${{ inputs.cloud_bucket }}'
