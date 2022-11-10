@@ -49,7 +49,7 @@ inputs:
     description: 'Regex with the allowed destinations. Others will fail'
     required: false
     type: string
-    default: '[/]prod$|[/]staging$|[/]dev$|([/]branches[/]+[A-Za-z0-9._%+-])|(releases[/]+[A-Za-z0-9._%+-])'
+    default: '[/]prod$|[/]staging$|[/]dev$|([/](branches|releases)[/][A-Za-z0-9._%+-\/]+$)'
   exclude:
     description: 'Regrex expression to exclude files'
     required: false
