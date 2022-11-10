@@ -27,13 +27,13 @@ if [[ $INPUT_TO =~ $INPUT_ALLOWED_DESTINATION ]]; then
     echo "Destination allowed"
 else
     echo "Error - Destination not allowed ($INPUT_TO)"
-    exit 1
+    echo "::error::Error - Destination not allowed ($INPUT_TO)" && exit 1
 fi
 
 # Validate the directory is not empty
 if [ -z "$(ls -A ${INPUT_PATH})" ]; then
     echo "Error - The source directory is empty. Publish not allowed"
-    exit 1
+    echo "::error::Error - The source directory is empty. Publish not allowed" && exit 1
 else
     echo "The source directory contains files. Publish allowed"
 
@@ -43,7 +43,7 @@ else
 
     if [ $? -ne 0 ]; then
         echo "Syncing failed"
-        exit 1
+        echo "::error::Syncing failed" && exit 1
     fi
     echo "Done."
 fi
